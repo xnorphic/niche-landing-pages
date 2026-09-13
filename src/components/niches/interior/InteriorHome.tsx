@@ -1,56 +1,61 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { NicheShell } from "@/components/shared/NicheShell";
 import {
-  FullBleedHero,
-  NichePageBody,
-} from "@/components/shared/NichePageSections";
+  CtaBand,
+  FeatureSplit,
+  FeatureStrip,
+  GalleryTiles,
+  NicheHero,
+  ProcessTimeline,
+  ReviewsWall,
+  ServiceCards,
+  SiteFooter,
+  StatBand,
+  TransformationSection,
+} from "@/components/shared/sections";
 import type { NicheConfig } from "@/lib/types";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function InteriorHome({ config }: { config: NicheConfig }) {
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-
-    const ctx = gsap.context(() => {
-      gsap.to("[data-interior-parallax]", {
-        yPercent: 12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "[data-section='hero']",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }, root);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={rootRef}>
-      <NicheShell config={config}>
-        <div data-interior-parallax>
-          <FullBleedHero config={config} imageSeedKey="interior-penthouse-hero" />
-        </div>
-        <NichePageBody
-          config={config}
-          resultsSectionId="transformations"
-          resultsTitle="Transformations"
-          galleryTitle="Portfolio"
-          testimonialTitle="Client stories"
-        />
-      </NicheShell>
-    </div>
+    <NicheShell config={config}>
+      <NicheHero config={config} />
+      <FeatureStrip features={config.features} />
+      <GalleryTiles
+        images={config.gallery}
+        headline={config.galleryHeadline}
+      />
+      <ServiceCards
+        services={config.services}
+        headline={config.servicesHeadline}
+        intro={config.servicesIntro}
+      />
+      <FeatureSplit
+        feature={config.feature}
+        businessName={config.businessName}
+        imageSide="right"
+      />
+      <TransformationSection
+        config={config}
+        headline={config.beforeAfterHeadline}
+      />
+      <StatBand stats={config.stats} headline={config.statsHeadline} />
+      <ProcessTimeline
+        steps={config.process}
+        headline={config.processHeadline}
+        intro={config.processIntro}
+      />
+      <ReviewsWall
+        testimonials={config.testimonials}
+        headline={config.testimonialsHeadline}
+        summary={config.reviewSummary}
+      />
+      <CtaBand
+        headline={config.ctaHeadline}
+        body={config.ctaBody}
+        primaryCta={config.primaryCta}
+      />
+      <SiteFooter config={config} />
+    </NicheShell>
   );
 }

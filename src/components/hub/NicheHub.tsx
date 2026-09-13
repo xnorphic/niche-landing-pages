@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { hubNiches } from "@/lib/niches";
-import { imageSeed } from "@/lib/utils";
 
 export function NicheHub() {
   const reduced = useReducedMotion();
@@ -19,9 +18,9 @@ export function NicheHub() {
 
       <main className="mx-auto w-[min(100%-2rem,72rem)] pb-20">
         <motion.div
-          initial={reduced ? false : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: reduced ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12 max-w-2xl"
         >
           <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
@@ -38,10 +37,10 @@ export function NicheHub() {
           {hubNiches.map((niche, index) => (
             <motion.article
               key={niche.id}
-              initial={reduced ? false : { opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.55,
+                duration: reduced ? 0 : 0.55,
                 delay: reduced ? 0 : index * 0.08,
                 ease: [0.22, 1, 0.36, 1],
               }}
@@ -52,15 +51,11 @@ export function NicheHub() {
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
-                    src={imageSeed(niche.image, 900, 560)}
+                    src={niche.image}
                     alt={`${niche.name} landing page preview`}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div
-                    className="absolute inset-0 opacity-30 mix-blend-multiply"
-                    style={{ backgroundColor: niche.accent }}
                   />
                 </div>
                 <div className="flex items-start justify-between gap-4 p-6">
@@ -69,7 +64,7 @@ export function NicheHub() {
                       {niche.name}
                     </h2>
                     <p className="mt-2 text-sm leading-relaxed text-[#5c5c58]">
-                      {niche.designRead}
+                      {niche.blurb}
                     </p>
                   </div>
                   <span

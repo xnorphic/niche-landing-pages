@@ -11,21 +11,20 @@ export function JsonLd({ config }: { config: NicheConfig }) {
     name: config.businessName,
     description: config.seo.description,
     url,
-    telephone: "{{TELEPHONE}}",
+    image: `${site}${config.heroImage}`,
+    telephone: config.secondaryCta,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "{{STREET_ADDRESS}}",
+      streetAddress: config.footerTrust.address,
       addressLocality: config.city,
-      postalCode: "{{POSTAL_CODE}}",
-      addressCountry: "{{COUNTRY}}",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "{{LAT}}",
-      longitude: "{{LNG}}",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: config.reviewSummary.score,
+      reviewCount: config.reviewSummary.count,
+      bestRating: "5",
     },
-    openingHours: "{{OPENING_HOURS}}",
-    priceRange: "{{PRICE_RANGE}}",
+    priceRange: "$$",
     sameAs: config.social
       .map((s) => s.url)
       .filter((u) => !u.startsWith("{{")),

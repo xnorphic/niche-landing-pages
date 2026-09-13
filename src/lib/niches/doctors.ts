@@ -1,193 +1,272 @@
 import type { NicheConfig } from "@/lib/types";
-import { imageSeed } from "@/lib/utils";
+
+const av = (g: "men" | "women", n: number) =>
+  `https://randomuser.me/api/portraits/${g}/${n}.jpg`;
 
 export const doctorsConfig: NicheConfig = {
   id: "doctors",
   slug: "doctors",
-  businessName: "{{CLINIC_NAME}}",
-  city: "{{CITY}}",
-  tagline: "Compassionate care across every stage of life.",
+  businessName: "Brightwell Dental & Implant Center",
+  city: "Austin",
+
+  heroEyebrow: "Restoring smiles across Austin since 2011",
+  heroHeadline: "Stronger implants,",
+  heroHeadlineAccent: "brighter futures.",
+  heroSubtext:
+    "Advanced implant and cosmetic dentistry with gentle, on-time care. Same-day appointments and a lifetime workmanship guarantee.",
+  heroImage: "/images/doctors-hero.png",
+
   designRead:
-    "Cool Clinical — trust-first multi-specialty clinic for a broad-age patient audience.",
-  primaryCta: "Book a visit",
-  secondaryCta: "Ask about a service",
+    "Cool Clinical, trust-first dental and implant center for a broad-age patient audience.",
+  primaryCta: "Book appointment",
+  secondaryCta: "(512) 555-0148",
   bookingIntent: "Book an appointment",
-  questionIntent: "Ask about a service",
+  questionIntent: "Ask about a treatment",
   chatbotDisclaimer:
     "This assistant routes booking requests only. It does not provide medical advice or triage.",
   defaultTheme: "light",
-  schemaType: "MedicalClinic",
+  schemaType: "Dentist",
   accentPreview: "#0E6B5C",
+
+  reviewSummary: { platform: "Google", score: "4.9", count: "612" },
+  avatars: [av("women", 68), av("men", 32), av("women", 44), av("men", 51)],
+
+  servicesHeadline: "Complete care for every smile",
+  servicesIntro:
+    "From a single implant to a full-arch restoration, our specialists deliver comfortable, predictable results.",
   services: [
     {
-      slug: "primary-care",
-      title: "Primary Care & Checkups",
-      description: "Annual exams, preventive screenings, and ongoing wellness support.",
+      slug: "dental-implants",
+      title: "Dental Implants",
+      description:
+        "Permanent, natural-looking replacements for missing teeth using 3D-guided placement.",
+      icon: "Tooth",
     },
     {
-      slug: "pediatrics",
-      title: "Pediatrics",
-      description: "Growth monitoring, immunizations, and family-centered child health.",
+      slug: "cosmetic-dentistry",
+      title: "Cosmetic Dentistry",
+      description:
+        "Veneers, bonding, and whitening that brighten your smile while looking completely natural.",
+      icon: "Sparkle",
     },
     {
-      slug: "womens-health",
-      title: "Women's Health",
-      description: "Reproductive care, prenatal visits, and hormone health consultations.",
+      slug: "clear-aligners",
+      title: "Clear Aligners",
+      description:
+        "Discreet, removable aligners that straighten teeth on a schedule that fits your life.",
+      icon: "Ruler",
     },
     {
-      slug: "dermatology",
-      title: "Dermatology",
-      description: "Skin exams, acne treatment, and cosmetic dermatology options.",
+      slug: "root-canal",
+      title: "Root Canal Therapy",
+      description:
+        "Modern, virtually painless treatment that saves your natural tooth and relieves pain fast.",
+      icon: "Syringe",
     },
     {
-      slug: "physical-therapy",
-      title: "Physical Therapy & Rehab",
-      description: "Post-injury recovery, mobility programs, and pain management plans.",
+      slug: "emergency-care",
+      title: "Emergency Dental Care",
+      description:
+        "Same-day relief for chipped teeth, lost crowns, and sudden pain, seven days a week.",
+      icon: "FirstAid",
     },
     {
-      slug: "diagnostics",
-      title: "Diagnostics & Labs",
-      description: "On-site blood work, imaging referrals, and rapid result coordination.",
+      slug: "preventive-care",
+      title: "Preventive Checkups",
+      description:
+        "Cleanings, exams, and early screenings that keep problems small and visits short.",
+      icon: "ShieldCheck",
     },
   ],
-  beforeAfter: [
+
+  features: [
     {
-      before: imageSeed("doctor-derm-before", 1200, 800),
-      after: imageSeed("doctor-derm-after", 1200, 800),
-      caption: "Dermatology treatment progress over twelve weeks.",
+      icon: "Clock",
+      title: "Same-day appointments",
+      description: "Call before noon and we will find you a chair today.",
     },
     {
-      before: imageSeed("doctor-pt-before", 1200, 800),
-      after: imageSeed("doctor-pt-after", 1200, 800),
-      caption: "Physical therapy mobility improvement after eight sessions.",
+      icon: "ShieldCheck",
+      title: "Board-certified team",
+      description: "Specialists with 15+ years of implant experience.",
+    },
+    {
+      icon: "HandHeart",
+      title: "Gentle, anxiety-free",
+      description: "Sedation options and a calm, unrushed environment.",
+    },
+    {
+      icon: "CheckCircle",
+      title: "Transparent pricing",
+      description: "Clear quotes and flexible payment plans, no surprises.",
     },
   ],
+
+  statsHeadline: "Trusted by Austin families for more than a decade",
+  stats: [
+    { value: "15+", label: "Years in Austin", icon: "Medal" },
+    { value: "12.4k", label: "Procedures completed" },
+    { value: "98%", label: "Would recommend us" },
+    { value: "4.9", label: "Average Google rating" },
+  ],
+
+  processHeadline: "Your visit, start to finish",
+  processIntro:
+    "A clear, unhurried path from first call to a healthy, confident smile.",
+  process: [
+    {
+      title: "Book & consult",
+      description:
+        "Share your goals in a relaxed consultation with 3D imaging and a same-day quote.",
+      icon: "CalendarCheck",
+    },
+    {
+      title: "Personalized plan",
+      description:
+        "We map out treatment, timing, and cost so you know exactly what to expect.",
+      icon: "Tooth",
+    },
+    {
+      title: "Treatment & follow-up",
+      description:
+        "Comfortable procedures backed by attentive check-ins and a lifetime guarantee.",
+      icon: "Heartbeat",
+    },
+  ],
+
+  feature: {
+    eyebrow: "About Brightwell",
+    headline: "Advanced care, beautiful results.",
+    body:
+      "Our team combines the latest imaging and implant technology with a genuinely calm chairside manner, so treatment feels straightforward and comfortable from day one.",
+    bullets: [
+      "3D-guided, minimally invasive implant placement",
+      "Sedation options for a completely relaxed visit",
+      "On-time appointments that respect your schedule",
+      "Lifetime workmanship guarantee on every implant",
+    ],
+    image: "/images/doctors-care.png",
+    badgeValue: "15+",
+    badgeLabel: "Years creating healthy smiles",
+  },
+
+  beforeAfter: [],
+  beforeAfterHeadline: "Real results",
   beforeAfterDisclosure:
     "Results vary by patient. Images shown with consent for illustrative purposes only.",
-  patientJourney: [
-    {
-      title: "Schedule",
-      description: "Choose a specialty and pick a time that fits your calendar.",
-    },
-    {
-      title: "Visit",
-      description: "Meet your care team in a calm, private exam environment.",
-    },
-    {
-      title: "Follow-up",
-      description: "Receive a clear plan with labs, referrals, or next steps as needed.",
-    },
-  ],
+
+  testimonialsHeadline: "Real patients, real smiles",
   testimonials: [
     {
       quote:
-        "The front desk remembered my daughter's name. That small detail made a stressful visit feel manageable.",
-      name: "Priya Mehta",
-      role: "Parent, pediatric patient",
+        "I put off implants for years out of fear. Brightwell made the whole thing painless and I finally have the smile I always wanted.",
+      name: "Priya Menon",
+      role: "Implant patient",
+      rating: 5,
+      avatar: av("women", 65),
     },
     {
       quote:
-        "Same-day dermatology saved me a week of waiting elsewhere. Clear instructions and no rushed appointment.",
-      name: "James Okonkwo",
-      role: "Dermatology patient",
+        "They fit me in the same morning I chipped a front tooth. Professional, kind, and I was back at work by lunch.",
+      name: "Marcus Reyes",
+      role: "Emergency visit",
+      rating: 5,
+      avatar: av("men", 44),
     },
     {
       quote:
-        "My physical therapist explained every exercise in plain language. I finally understand my recovery plan.",
-      name: "Elena Vasquez",
-      role: "Rehab patient",
+        "The pricing was explained up front with no surprises. My aligners finished a month ahead of schedule.",
+      name: "Hannah Whitfield",
+      role: "Clear aligners",
+      rating: 5,
+      avatar: av("women", 33),
     },
     {
       quote:
-        "Lab results arrived in my portal before I got home. The nurse called to walk me through the numbers.",
-      name: "David Chen",
-      role: "Primary care patient",
+        "Every appointment started on time. As someone with a packed calendar, that alone earns five stars.",
+      name: "David Okafor",
+      role: "Cosmetic patient",
+      rating: 4,
+      avatar: av("men", 76),
+    },
+    {
+      quote:
+        "My daughter is nervous at the dentist and the whole team was so gentle with her. We drive across town for them now.",
+      name: "Sofia Alvarez",
+      role: "Parent, family patient",
+      rating: 5,
+      avatar: av("women", 12),
+    },
+    {
+      quote:
+        "From consult to final crown, the follow-up was excellent. They called to check in the evening after my procedure.",
+      name: "Elliot Grant",
+      role: "Full-arch restoration",
+      rating: 5,
+      avatar: av("men", 19),
     },
   ],
-  gallery: [
-    {
-      src: imageSeed("doctor-clinic-waiting", 900, 600),
-      alt: "Bright clinic waiting area with natural light and comfortable seating",
-    },
-    {
-      src: imageSeed("doctor-exam-room", 900, 600),
-      alt: "Private exam room with modern medical equipment and calming decor",
-    },
-    {
-      src: imageSeed("doctor-team", 900, 600),
-      alt: "Multi-specialty medical team in a collaborative consultation",
-    },
-    {
-      src: imageSeed("doctor-lab", 900, 600),
-      alt: "On-site diagnostics lab with organized sample processing area",
-    },
-  ],
+
+  galleryHeadline: "Inside our clinic",
+  gallery: [],
+
   trustChips: [
-    { label: "License {{LICENSE_NUMBER}}", mock: true },
-    { label: "{{YEARS_ACTIVE}} years serving {{CITY}}", mock: true },
-    { label: "Same-day appointments available", mock: false },
+    { label: "TX Dental Board #DN-20418", icon: "ShieldCheck", mock: true },
+    { label: "15 years serving Austin", icon: "Medal", mock: true },
+    { label: "Same-day appointments", icon: "Clock", mock: false },
   ],
   footerTrust: {
-    license: "Medical License {{LICENSE_NUMBER}}",
-    address: "{{STREET_ADDRESS}}, {{CITY}} {{POSTAL_CODE}}",
-    privacyNote: "HIPAA-compliant privacy practices. Your health data stays protected.",
-    reviewLink: "Read our reviews",
+    license: "Registered practice, TX Dental Board #DN-20418",
+    address: "2200 Guadalupe St, Austin, TX 78705",
+    privacyNote:
+      "HIPAA-compliant privacy practices. Your health data stays protected.",
+    reviewLink: "Read our Google reviews",
   },
   social: [
-    { platform: "instagram", url: "{{INSTAGRAM_URL}}" },
-    { platform: "facebook", url: "{{FACEBOOK_URL}}" },
-    { platform: "tiktok", url: "{{TIKTOK_URL}}" },
+    { platform: "instagram", url: "https://instagram.com" },
+    { platform: "facebook", url: "https://facebook.com" },
+    { platform: "tiktok", url: "https://tiktok.com" },
   ],
   bookingFields: [
     { type: "text", name: "name", label: "Full name", required: true },
     { type: "tel", name: "phone", label: "Phone number", required: true },
     {
       type: "select",
-      name: "specialty",
-      label: "Specialty or physician",
-      options: [
-        "Primary Care",
-        "Pediatrics",
-        "Women's Health",
-        "Dermatology",
-        "Physical Therapy",
-        "Diagnostics",
-      ],
-      required: true,
-    },
-    {
-      type: "select",
       name: "service",
-      label: "Service of interest",
+      label: "Treatment of interest",
       options: [
-        "Primary Care & Checkups",
-        "Pediatrics",
-        "Women's Health",
-        "Dermatology",
-        "Physical Therapy & Rehab",
-        "Diagnostics & Labs",
+        "Dental Implants",
+        "Cosmetic Dentistry",
+        "Clear Aligners",
+        "Root Canal Therapy",
+        "Emergency Dental Care",
+        "Preventive Checkup",
       ],
       required: true,
     },
     { type: "text", name: "datetime", label: "Preferred date and time" },
-    { type: "textarea", name: "note", label: "Additional notes" },
+    { type: "textarea", name: "note", label: "Anything we should know?" },
   ],
+
+  ctaHeadline: "Ready to transform your smile?",
+  ctaBody:
+    "Book a consultation today and take the first step toward a healthier, more confident smile.",
+
   about: {
-    headline: "Care that respects your time and your health.",
-    body: "Our multi-specialty clinic brings coordinated care under one roof, so families spend less time navigating referrals and more time healing.",
+    headline: "Care that respects your time and your smile.",
+    body: "Brightwell brings implant, cosmetic, and preventive dentistry under one roof, so you spend less time in waiting rooms and more time smiling.",
   },
   seo: {
-    title: "{{Specialty}} Doctor in {{City}} | {{Clinic Name}}",
+    title: "Dental Implants & Cosmetic Dentistry in Austin | Brightwell",
     description:
-      "Same-day appointments, board-certified specialists, and coordinated care in {{City}}. Book a visit today.",
-    keyword: "doctor near me",
+      "Same-day appointments, board-certified dentists, and 3D-guided implants in Austin. 4.9 stars from 600+ patients. Book your visit today.",
+    keyword: "dental implants austin",
   },
   navAnchors: [
     { id: "services", label: "Services" },
-    { id: "results", label: "Results" },
-    { id: "testimonials", label: "Patients" },
+    { id: "process", label: "How it works" },
+    { id: "testimonials", label: "Reviews" },
     { id: "about", label: "About" },
-    { id: "gallery", label: "Clinic" },
     { id: "contact", label: "Contact" },
   ],
   radius: { card: "12px", button: "9999px", input: "8px" },

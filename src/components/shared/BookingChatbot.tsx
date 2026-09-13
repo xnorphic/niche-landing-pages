@@ -113,12 +113,12 @@ export function BookingChatbot({ config }: { config: NicheConfig }) {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(tryAutoOpen, 6000);
+    const timer = setTimeout(tryAutoOpen, 12000);
     const onScroll = () => {
       const depth =
         window.scrollY /
         (document.documentElement.scrollHeight - window.innerHeight);
-      if (depth >= 0.4) {
+      if (depth >= 0.55) {
         tryAutoOpen();
         window.removeEventListener("scroll", onScroll);
       }
