@@ -57,6 +57,41 @@
   border: 1px solid var(--niche-border);
 }
 
+/* Translucent frosted-glass panel (web approximation, not Apple Liquid Glass). */
+.niche-glass {
+  background: color-mix(in srgb, var(--niche-surface) 68%, transparent);
+  border: 1px solid color-mix(in srgb, var(--niche-text) 12%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 24%, transparent),
+    0 20px 55px rgba(0, 0, 0, 0.22);
+}
+
+.niche-glass-input {
+  background: color-mix(in srgb, var(--niche-surface) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--niche-text) 14%, transparent);
+  color: var(--niche-text);
+  border-radius: var(--niche-radius-input);
+}
+
+.niche-glass-input::placeholder {
+  color: var(--niche-text-secondary);
+  opacity: 0.75;
+}
+
+/* Solid fallback when the user prefers reduced transparency. */
+@media (prefers-reduced-transparency: reduce) {
+  .niche-glass {
+    background: var(--niche-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .niche-glass-input {
+    background: var(--niche-surface);
+  }
+}
+
 .niche-input {
   border-radius: var(--niche-radius-input);
   background: var(--niche-surface);
