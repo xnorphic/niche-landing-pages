@@ -1,0 +1,89 @@
+.niche-page {
+  background: var(--niche-bg);
+  color: var(--niche-text);
+  scroll-behavior: smooth;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.niche-page h1,
+.niche-page h2,
+.niche-page .font-display {
+  font-family: var(--font-display, var(--font-body)), system-ui, sans-serif;
+}
+
+.niche-page a:focus-visible,
+.niche-page button:focus-visible,
+.niche-page input:focus-visible,
+.niche-page select:focus-visible,
+.niche-page textarea:focus-visible {
+  outline: 2px solid var(--niche-accent);
+  outline-offset: 2px;
+}
+
+.niche-surface {
+  background: var(--niche-surface);
+  border: 1px solid var(--niche-border);
+}
+
+.niche-accent {
+  color: var(--niche-accent);
+}
+
+.niche-btn-primary {
+  background: var(--niche-accent);
+  color: var(--niche-on-accent);
+  border-radius: var(--niche-radius-button);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.niche-btn-primary:hover {
+  opacity: 0.92;
+}
+
+.niche-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.niche-btn-ghost {
+  border: 1px solid var(--niche-border);
+  color: var(--niche-text);
+  border-radius: var(--niche-radius-button);
+  background: transparent;
+}
+
+.niche-card {
+  border-radius: var(--niche-radius-card);
+  background: var(--niche-surface);
+  border: 1px solid var(--niche-border);
+}
+
+.niche-input {
+  border-radius: var(--niche-radius-input);
+  background: var(--niche-surface);
+  border: 1px solid var(--niche-border);
+  color: var(--niche-text);
+}
+
+.niche-input::placeholder {
+  color: var(--niche-text-secondary);
+  opacity: 0.8;
+}
+
+.niche-text-secondary {
+  color: var(--niche-text-secondary);
+}
+
+.niche-section {
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.niche-container {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .niche-container {
+    width: min(100% - 3rem, 72rem);
+  }
+}

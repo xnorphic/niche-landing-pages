@@ -1,0 +1,25 @@
+[data-niche="doctors"][data-theme="light"] {
+  --niche-bg: #f5f6f4;
+  --niche-surface: #ffffff;
+  --niche-text: #151918;
+  --niche-text-secondary: #5b6461;
+  --niche-accent: #0e6b5c;
+  --niche-on-accent: #f5f6f4;
+  --niche-border: #e2e5e2;
+  --niche-radius-card: 12px;
+  --niche-radius-button: 9999px;
+  --niche-radius-input: 8px;
+}
+
+[data-niche="doctors"][data-theme="dark"] {
+  --niche-bg: #141716;
+  --niche-surface: #1b1f1d;
+  --niche-text: #edefed;
+  --niche-text-secondary: #9ba39f;
+  --niche-accent: #2fa893;
+  --niche-on-accent: #141716;
+  --niche-border: #2a2e2c;
+  --niche-radius-card: 12px;
+  --niche-radius-button: 9999px;
+  --niche-radius-input: 8px;
+}

@@ -1,0 +1,27 @@
+[data-niche="jewellery"][data-theme="light"] {
+  --niche-bg: #f7f7f8;
+  --niche-surface: #ffffff;
+  --niche-text: #17181b;
+  --niche-text-secondary: #6b6e75;
+  --niche-accent: #7a2340;
+  --niche-on-accent: #f7f7f8;
+  --niche-border: #e7e8ea;
+  --niche-metallic: #9ba0a6;
+  --niche-radius-card: 8px;
+  --niche-radius-button: 9999px;
+  --niche-radius-input: 8px;
+}
+
+[data-niche="jewellery"][data-theme="dark"] {
+  --niche-bg: #131316;
+  --niche-surface: #1c1c20;
+  --niche-text: #f1f1f3;
+  --niche-text-secondary: #a3a6ac;
+  --niche-accent: #c4436b;
+  --niche-on-accent: #131316;
+  --niche-border: #2a2a2f;
+  --niche-metallic: #6e727a;
+  --niche-radius-card: 8px;
+  --niche-radius-button: 9999px;
+  --niche-radius-input: 8px;
+}

@@ -1,0 +1,25 @@
+[data-niche="interior"][data-theme="dark"] {
+  --niche-bg: #141311;
+  --niche-surface: #1e1c19;
+  --niche-text: #f3f1ec;
+  --niche-text-secondary: #a9a296;
+  --niche-accent: #c4622e;
+  --niche-on-accent: #141311;
+  --niche-border: #2c2a26;
+  --niche-radius-card: 4px;
+  --niche-radius-button: 9999px;
+  --niche-radius-input: 4px;
+}
+
+[data-niche="interior"][data-theme="light"] {
+  --niche-bg: #edede9;
+  --niche-surface: #f7f6f3;
+  --niche-text: #1a1c1b;
+  --niche-text-secondary: #5c5a55;
+  --niche-accent: #a84e22;
+  --niche-on-accent: #f7f6f3;
+  --niche-border: #ddd9d2;
+  --niche-radius-card: 4px;
+  --niche-radius-button: 9999px;
+  --niche-radius-input: 4px;
+}

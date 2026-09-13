@@ -1,0 +1,27 @@
+[data-niche="hvac"][data-theme="light"] {
+  --niche-bg: #f5f6f7;
+  --niche-surface: #ffffff;
+  --niche-text: #14181c;
+  --niche-text-secondary: #5c6672;
+  --niche-accent: #db6a16;
+  --niche-on-accent: #14181c;
+  --niche-border: #e1e4e7;
+  --niche-neutral: #4b5a66;
+  --niche-radius-card: 16px;
+  --niche-radius-button: 9999px;
+  --niche-radius-input: 8px;
+}
+
+[data-niche="hvac"][data-theme="dark"] {
+  --niche-bg: #12161a;
+  --niche-surface: #1a2126;
+  --niche-text: #eef1f3;
+  --niche-text-secondary: #9aa6af;
+  --niche-accent: #ff8b3d;
+  --niche-on-accent: #12161a;
+  --niche-border: #263038;
+  --niche-neutral: #7e8e99;
+  --niche-radius-card: 16px;
+  --niche-radius-button: 9999px;
+  --niche-radius-input: 8px;
+}
