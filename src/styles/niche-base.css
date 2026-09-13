@@ -57,20 +57,20 @@
   border: 1px solid var(--niche-border);
 }
 
-/* Translucent frosted-glass panel (web approximation, not Apple Liquid Glass). */
+/* Frosted-glass panel (web approximation, not Apple Liquid Glass). */
 .niche-glass {
-  background: color-mix(in srgb, var(--niche-surface) 68%, transparent);
+  background: color-mix(in srgb, var(--niche-surface) 88%, transparent);
   border: 1px solid color-mix(in srgb, var(--niche-text) 12%, transparent);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(32px) saturate(180%) brightness(1.04);
+  -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(1.04);
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, #ffffff 24%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #ffffff 30%, transparent),
     0 20px 55px rgba(0, 0, 0, 0.22);
 }
 
 .niche-glass-input {
-  background: color-mix(in srgb, var(--niche-surface) 55%, transparent);
-  border: 1px solid color-mix(in srgb, var(--niche-text) 14%, transparent);
+  background: color-mix(in srgb, var(--niche-surface) 78%, transparent);
+  border: 1px solid color-mix(in srgb, var(--niche-text) 16%, transparent);
   color: var(--niche-text);
   border-radius: var(--niche-radius-input);
 }
