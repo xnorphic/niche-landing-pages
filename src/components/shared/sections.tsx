@@ -350,7 +350,7 @@ export function ProcessTimeline({
                 <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--niche-border)] text-[var(--niche-accent)]">
                   <NicheIcon name={step.icon} size={22} weight="regular" />
                 </span>
-                <span className="font-display text-3xl font-semibold text-[var(--niche-border)]">
+                <span className="niche-text-secondary font-display text-3xl font-semibold tabular-nums">
                   0{i + 1}
                 </span>
               </div>
