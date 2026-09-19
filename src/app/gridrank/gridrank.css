@@ -4,8 +4,9 @@
   --font-heading: "HelveticaNowDisplay-Medium", "Helvetica Neue", Arial, sans-serif;
   --font-body: "HelveticaNowDisplayW01-Rg", "Helvetica Neue", Arial, sans-serif;
   --gr-accent: #ef845d;
+  --gr-hero-fallback: #c43b32;
   font-family: var(--font-body);
-  background: #000;
+  background: #0b0b0b;
   color: #fff;
   scroll-padding-top: 5.5rem;
 }
@@ -80,19 +81,45 @@
   animation: gr-blink 1s step-end infinite;
 }
 
-.gr-enter {
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
-  pointer-events: none;
+@keyframes gr-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.gr-enter.is-in {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+.gr-enter {
+  animation: gr-fade-up 0.7s ease both;
+}
+
+.gr-enter-late {
+  animation-delay: 0.72s;
+}
+
+.gr-video-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--gr-hero-fallback);
+}
+
+.gr-video-slot video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% center;
+}
+
+@media (min-width: 768px) {
+  .gr-video-slot {
+    position: fixed;
+  }
 }
 
 .gr-page {
@@ -311,10 +338,9 @@
   }
 
   .gr-enter,
-  .gr-enter.is-in {
+  .gr-enter-late {
+    animation: none;
     opacity: 1;
     transform: none;
-    transition: none;
-    pointer-events: auto;
   }
 }

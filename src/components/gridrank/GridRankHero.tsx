@@ -28,34 +28,34 @@ const NAV_LINKS: { label: string; href: string; internal?: boolean }[] = [
 ];
 
 function useTypewriter(text: string, speed = 38, startDelay = 600) {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
+  const [displayed, setDisplayed] = useState(text);
+  const [done, setDone] = useState(true);
 
   useEffect(() => {
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+    if (reduce || mobile) {
+      const t = setTimeout(() => {
+        setDisplayed(text);
+        setDone(true);
+      }, 0);
+      return () => clearTimeout(t);
+    }
 
     let i = 0;
     let interval: ReturnType<typeof setInterval> | undefined;
-    const start = setTimeout(
-      () => {
-        if (reduce) {
-          setDisplayed(text);
+    const start = setTimeout(() => {
+      setDisplayed("");
+      setDone(false);
+      interval = setInterval(() => {
+        i += 1;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) {
+          if (interval) clearInterval(interval);
           setDone(true);
-          return;
         }
-        interval = setInterval(() => {
-          i += 1;
-          setDisplayed(text.slice(0, i));
-          if (i >= text.length) {
-            if (interval) clearInterval(interval);
-            setDone(true);
-          }
-        }, speed);
-      },
-      reduce ? 0 : startDelay,
-    );
+      }, speed);
+    }, startDelay);
 
     return () => {
       clearTimeout(start);
@@ -98,8 +98,6 @@ export function GridRankHero() {
   const seekingRef = useRef(false);
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [introIn, setIntroIn] = useState(false);
-  const [restIn, setRestIn] = useState(false);
   const [copied, setCopied] = useState(false);
   const [frosted, setFrosted] = useState(false);
 
@@ -108,16 +106,6 @@ export function GridRankHero() {
     38,
     INTRO_FADE_MS + 160,
   );
-
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const intro = setTimeout(() => setIntroIn(true), reduce ? 0 : 40);
-    const rest = setTimeout(() => setRestIn(true), reduce ? 0 : INTRO_FADE_MS);
-    return () => {
-      clearTimeout(intro);
-      clearTimeout(rest);
-    };
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -167,8 +155,11 @@ export function GridRankHero() {
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
+    video.setAttribute("playsinline", "true");
+    video.setAttribute("webkit-playsinline", "true");
     video.preload = "auto";
-    video.pause();
+
+    const mobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
 
     let ready = video.readyState >= 1 && Number.isFinite(video.duration);
     let stuckTimer: ReturnType<typeof setTimeout> | undefined;
@@ -204,6 +195,7 @@ export function GridRankHero() {
     };
 
     const onPointerMove = (e: PointerEvent) => {
+      if (mobile) return;
       const dur = duration();
       if (!dur || !ready) return;
       if (prevXRef.current === null) {
@@ -222,9 +214,16 @@ export function GridRankHero() {
 
     const onReady = () => {
       ready = true;
-      video.pause();
       if (!Number.isFinite(targetTimeRef.current)) {
         targetTimeRef.current = 0;
+      }
+      if (mobile) {
+        video.loop = true;
+        void video.play().catch(() => {
+          video.currentTime = 0;
+        });
+      } else {
+        video.pause();
       }
     };
 
@@ -389,30 +388,31 @@ export function GridRankHero() {
         </a>
       </div>
 
-      <header className="relative min-h-dvh overflow-hidden bg-black text-white">
+      <header className="relative min-h-[100svh] overflow-hidden text-white">
         <h1 className="sr-only">
           GridRank Agency builds websites that book appointments while you work
           for clinics, consultants, and service businesses in Dubai, the UK,
           Canada, and the US
         </h1>
 
-        <video
-          ref={videoRef}
-          muted
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          disableRemotePlayback
-          tabIndex={-1}
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 h-full w-full object-cover"
-          style={{ zIndex: 0, objectPosition: "72% center" }}
-        >
-          <source src={VIDEO_SRC} type="video/mp4" />
-        </video>
+        <div className="gr-video-slot" aria-hidden="true">
+          <video
+            ref={videoRef}
+            muted
+            playsInline
+            autoPlay
+            loop
+            preload="auto"
+            disablePictureInPicture
+            disableRemotePlayback
+            tabIndex={-1}
+          >
+            <source src={VIDEO_SRC} type="video/mp4" />
+          </video>
+        </div>
 
       <section
-        className="relative flex min-h-dvh flex-col justify-end overflow-hidden px-5 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-8 md:justify-center md:px-10 md:pb-16"
+        className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-5 pb-[max(3rem,env(safe-area-inset-bottom))] pt-24 sm:px-8 md:justify-center md:px-10 md:pb-16"
         style={{ zIndex: 1 }}
       >
         <div
@@ -422,7 +422,7 @@ export function GridRankHero() {
 
         <div className="relative z-10 w-full max-w-xl">
           <p
-            className={`gr-enter mb-5 sm:mb-6 ${introIn ? "is-in" : ""}`}
+            className="gr-enter mb-5 sm:mb-6"
             style={{
               fontSize: "clamp(17px, 4.2vw, 26px)",
               lineHeight: 1.3,
@@ -435,7 +435,7 @@ export function GridRankHero() {
             GridRank&apos;s enquiry concierge
           </p>
 
-          <div className={`gr-enter ${restIn ? "is-in" : ""}`}>
+          <div className="gr-enter gr-enter-late">
             <p
               className="mb-5 text-white sm:mb-6"
               style={{
