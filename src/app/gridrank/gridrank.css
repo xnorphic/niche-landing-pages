@@ -5,8 +5,15 @@
   --font-heading: "HelveticaNowDisplay-Medium", "Helvetica Neue", Arial, sans-serif;
   --font-body: "HelveticaNowDisplayW01-Rg", "Helvetica Neue", Arial, sans-serif;
   font-family: var(--font-body);
-  background: #000;
+  background: #b0491f;
   color: #fff;
+}
+
+/* Deep-orange brand gradient (matches the logo tile #ef845d). */
+.gr-bg {
+  background:
+    radial-gradient(115% 90% at 78% 18%, #f6a274 0%, rgba(246, 162, 116, 0) 55%),
+    linear-gradient(150deg, #ef865c 0%, #d76a3d 46%, #b0491f 100%);
 }
 
 .gridrank-root * {

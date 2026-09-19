@@ -1,12 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-const EMAIL = "hello@gridrank.agency";
-const VIDEO_SRC =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4";
-const SENSITIVITY = 0.8;
+const EMAIL = "founder@gridrankagency.com";
+const BOOKING_URL = "https://gridrankagency.com/booking";
+const SERVICES_URL = "https://gridrankagency.com/services";
 
 function mailto(subject?: string) {
   return subject
@@ -18,7 +18,7 @@ function mailto(subject?: string) {
 // so informational links open an enquiry and "Case studies" points at the live
 // demo builds (the /doctors, /interior, /hvac, /jewellery pages).
 const NAV_LINKS: { label: string; href: string; internal?: boolean }[] = [
-  { label: "Services", href: mailto("Services enquiry — GridRank") },
+  { label: "Services", href: SERVICES_URL },
   { label: "Case studies", href: "/", internal: true },
   { label: "FAQ", href: mailto("Quick question — GridRank") },
   { label: "Contact", href: mailto() },
@@ -83,24 +83,19 @@ const WHITE_PILL =
 
 // Four action pills. Distinct intents so none duplicate the nav "Start a project".
 const PILLS: { label: string; href: string; internal?: boolean }[] = [
-  { label: "Book a consultation", href: mailto("Book a consultation — GridRank") },
+  { label: "Book a consultation", href: BOOKING_URL },
   { label: "Send a brief hello", href: mailto() },
-  { label: "See how we operate", href: mailto("How GridRank operates") },
+  { label: "How We Supercharge Your Business", href: SERVICES_URL },
   { label: "View a demo build", href: "/", internal: true },
 ];
 
 export function GridRankHero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const prevXRef = useRef<number | null>(null);
-  const targetTimeRef = useRef(0);
-  const seekingRef = useRef(false);
-
   const [menuOpen, setMenuOpen] = useState(false);
   const [pillsVisible, setPillsVisible] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const { displayed, done } = useTypewriter(
-    "Glad you stopped by. Your website should be booking appointments while you run the business. So, what are we building?",
+    "Glad to see someone with a creative side.\nYour website should be booking appointments while you run the business. So, what are we building?",
   );
 
   // Pills fade in 400ms after load, independent of the typewriter.
@@ -108,50 +103,6 @@ export function GridRankHero() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const t = setTimeout(() => setPillsVisible(true), reduce ? 0 : 400);
     return () => clearTimeout(t);
-  }, []);
-
-  // Mouse-scrub the background video without flooding seeks.
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const seek = () => {
-      const dur = video.duration;
-      if (!Number.isFinite(dur) || dur <= 0) return;
-      seekingRef.current = true;
-      video.currentTime = targetTimeRef.current;
-    };
-
-    const onSeeked = () => {
-      seekingRef.current = false;
-      const dur = video.duration;
-      if (!Number.isFinite(dur)) return;
-      if (Math.abs(video.currentTime - targetTimeRef.current) > 0.01) {
-        seek();
-      }
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      const dur = video.duration;
-      if (!Number.isFinite(dur) || dur <= 0) return;
-      if (prevXRef.current === null) {
-        prevXRef.current = e.clientX;
-        return;
-      }
-      const delta = e.clientX - prevXRef.current;
-      prevXRef.current = e.clientX;
-      const offset = (delta / window.innerWidth) * SENSITIVITY * dur;
-      const next = Math.max(0, Math.min(dur, targetTimeRef.current + offset));
-      targetTimeRef.current = next;
-      if (!seekingRef.current) seek();
-    };
-
-    video.addEventListener("seeked", onSeeked);
-    window.addEventListener("mousemove", onMouseMove);
-    return () => {
-      video.removeEventListener("seeked", onSeeked);
-      window.removeEventListener("mousemove", onMouseMove);
-    };
   }, []);
 
   const copyEmail = useCallback(async () => {
@@ -165,18 +116,12 @@ export function GridRankHero() {
   }, []);
 
   return (
-    <div className="gridrank-root relative min-h-screen overflow-hidden bg-black text-white">
-      {/* Background video (mouse-scrub controlled, no autoplay) */}
-      <video
-        ref={videoRef}
-        src={VIDEO_SRC}
-        muted
-        playsInline
-        preload="auto"
-        tabIndex={-1}
+    <div className="gridrank-root relative min-h-screen overflow-hidden text-white">
+      {/* Deep-orange brand gradient background */}
+      <div
         aria-hidden="true"
-        className="fixed inset-0 h-full w-full object-cover"
-        style={{ zIndex: 0, objectPosition: "70% center" }}
+        className="gr-bg fixed inset-0"
+        style={{ zIndex: 0 }}
       />
 
       {/* Navbar */}
@@ -184,19 +129,20 @@ export function GridRankHero() {
         className="fixed inset-x-0 top-0 flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5"
         style={{ zIndex: 10 }}
       >
-        <Link href="/gridrank" className="flex items-center gap-3">
+        <Link href="/gridrank" className="flex items-center gap-2.5">
+          <Image
+            src="/images/gridrank-logo.png"
+            alt="GridRank Agency"
+            width={44}
+            height={44}
+            priority
+            className="h-9 w-9 sm:h-11 sm:w-11"
+          />
           <span
             className="text-[21px] tracking-tight text-white sm:text-[26px]"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            GridRank®
-          </span>
-          <span
-            aria-hidden="true"
-            className="select-none text-[25px] text-white sm:text-[30px]"
-            style={{ letterSpacing: "-0.02em" }}
-          >
-            ✳︎
+            GridRank
           </span>
         </Link>
 
@@ -338,6 +284,7 @@ export function GridRankHero() {
               lineHeight: 1.35,
               fontWeight: 400,
               minHeight: 54,
+              whiteSpace: "pre-line",
             }}
           >
             {displayed}
