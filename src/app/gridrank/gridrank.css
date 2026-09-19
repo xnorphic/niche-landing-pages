@@ -35,17 +35,30 @@
 
 .gr-nav {
   isolation: isolate;
-  background: rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.28);
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    backdrop-filter 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.gr-nav.is-frosted {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(22px) saturate(160%);
   -webkit-backdrop-filter: blur(22px) saturate(160%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.28);
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .gr-nav {
-    background: rgba(255, 255, 255, 0.14);
+  .gr-nav.is-frosted {
+    background: rgba(255, 255, 255, 0.16);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }

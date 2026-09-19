@@ -101,6 +101,7 @@ export function GridRankHero() {
   const [introIn, setIntroIn] = useState(false);
   const [restIn, setRestIn] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [frosted, setFrosted] = useState(false);
 
   const { displayed, done } = useTypewriter(
     "Glad to see someone with a creative side.\nYour website should be booking appointments while you run the business. So, what are we building?",
@@ -124,6 +125,40 @@ export function GridRankHero() {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    let scrolls = 0;
+    let locked = false;
+
+    const apply = () => {
+      if (window.scrollY < 40) {
+        scrolls = 0;
+        setFrosted(false);
+        return;
+      }
+      const leftHero = window.scrollY >= window.innerHeight * 0.55;
+      setFrosted(scrolls >= 2 || leftHero);
+    };
+
+    const markScroll = () => {
+      if (locked) return;
+      locked = true;
+      scrolls += 1;
+      apply();
+      window.setTimeout(() => {
+        locked = false;
+      }, 480);
+    };
+
+    window.addEventListener("scroll", apply, { passive: true });
+    window.addEventListener("wheel", markScroll, { passive: true });
+    window.addEventListener("touchmove", markScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", apply);
+      window.removeEventListener("wheel", markScroll);
+      window.removeEventListener("touchmove", markScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -228,7 +263,7 @@ export function GridRankHero() {
   return (
     <>
       <nav
-        className="gr-nav fixed inset-x-0 top-0 flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5"
+        className={`gr-nav fixed inset-x-0 top-0 flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5${frosted ? " is-frosted" : ""}`}
         style={{
           zIndex: 10,
           paddingTop: "max(1rem, env(safe-area-inset-top))",
