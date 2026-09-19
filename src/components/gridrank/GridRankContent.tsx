@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookieSettingsButton } from "@/components/gridrank/CookieConsent";
 import {
   GRIDRANK_BOOKING,
   GRIDRANK_EMAIL,
@@ -143,10 +144,14 @@ export function GridRankContent() {
           <a href="#faq">FAQ</a>
           <a href={`mailto:${GRIDRANK_EMAIL}`}>Contact</a>
           <a href={GRIDRANK_BOOKING}>Start a project</a>
+          <Link href="/gridrank/privacy">Privacy</Link>
+          <Link href="/gridrank/terms">Terms</Link>
+          <CookieSettingsButton />
         </nav>
         <p className="gr-fine">
-          Dubai &amp; UAE · United Kingdom · Canada · United States · Response
-          within one working day · © {new Date().getFullYear()} GridRank Agency
+          Dubai &amp; UAE · United Kingdom · United States · UK GDPR · UAE PDPL
+          · We do not sell personal information · Response within one working
+          day · © {new Date().getFullYear()} GridRank Agency
         </p>
       </footer>
     </div>

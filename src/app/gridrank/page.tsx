@@ -88,13 +88,13 @@ export default function GridRankPage() {
   };
 
   return (
-    <div className="gridrank-root">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
       />
       <GridRankHero />
       <GridRankContent />
-    </div>
+    </>
   );
 }

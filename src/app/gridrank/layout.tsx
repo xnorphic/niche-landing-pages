@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CookieConsent } from "@/components/gridrank/CookieConsent";
 import {
   GRIDRANK_DESCRIPTION,
   GRIDRANK_KEYWORDS,
@@ -58,7 +59,10 @@ export default function GridRankLayout({ children }: LayoutProps<"/gridrank">) {
         precedence="default"
         href="https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg"
       />
-      {children}
+      <div className="gridrank-root">
+        {children}
+        <CookieConsent />
+      </div>
     </>
   );
 }

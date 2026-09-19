@@ -198,6 +198,80 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+.gr-cookie {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 40;
+  max-width: 36rem;
+  margin-inline: auto;
+  padding: 1.15rem 1.2rem 1.2rem;
+  background: color-mix(in srgb, #14110f 88%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  color: #fff;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+.gr-cookie h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.gr-cookie p,
+.gr-cookie-note {
+  margin: 0 0 0.75rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.gr-cookie a,
+.gr-cookie-reset {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.gr-cookie-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.gr-cookie-actions button {
+  flex: 1 1 9.5rem;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.gr-cookie-actions button:hover {
+  background: #fff;
+  color: #111;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .gr-cookie {
+    background: #14110f;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .gr-cursor {
     animation: none;
