@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const EMAIL = "founder@gridrankagency.com";
 const BOOKING_URL = "https://gridrankagency.com/booking";
 const SERVICES_URL = "https://gridrankagency.com/services";
+const VIDEO_SRC =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4";
+const SENSITIVITY = 0.8;
 
 function mailto(subject?: string) {
   return subject
@@ -90,6 +93,11 @@ const PILLS: { label: string; href: string; internal?: boolean }[] = [
 ];
 
 export function GridRankHero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const prevXRef = useRef<number | null>(null);
+  const targetTimeRef = useRef(0);
+  const seekingRef = useRef(false);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [pillsVisible, setPillsVisible] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -105,6 +113,100 @@ export function GridRankHero() {
     return () => clearTimeout(t);
   }, []);
 
+  // Mouse-scrub the background video without flooding seeks.
+  // Matches the original spec: mousemove delta → time offset, clamp,
+  // currentTime seek, onSeeked queues the next frame if the target moved.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.preload = "auto";
+    video.pause();
+
+    let ready = video.readyState >= 1 && Number.isFinite(video.duration);
+    let stuckTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const duration = () => {
+      const dur = video.duration;
+      return Number.isFinite(dur) && dur > 0 ? dur : 0;
+    };
+
+    const seek = () => {
+      const dur = duration();
+      if (!dur || !ready) return;
+      const next = Math.max(0, Math.min(dur, targetTimeRef.current));
+      if (Math.abs(video.currentTime - next) < 0.01) {
+        seekingRef.current = false;
+        return;
+      }
+      seekingRef.current = true;
+      video.currentTime = next;
+      // If the browser swallows the seek (no seeked event), unlock the queue.
+      if (stuckTimer) clearTimeout(stuckTimer);
+      stuckTimer = setTimeout(() => {
+        seekingRef.current = false;
+      }, 180);
+    };
+
+    const onSeeked = () => {
+      if (stuckTimer) clearTimeout(stuckTimer);
+      seekingRef.current = false;
+      if (!duration()) return;
+      if (Math.abs(video.currentTime - targetTimeRef.current) > 0.01) {
+        seek();
+      }
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      const dur = duration();
+      if (!dur || !ready) return;
+      if (prevXRef.current === null) {
+        prevXRef.current = e.clientX;
+        return;
+      }
+      const delta = e.clientX - prevXRef.current;
+      prevXRef.current = e.clientX;
+      const offset = (delta / window.innerWidth) * SENSITIVITY * dur;
+      targetTimeRef.current = Math.max(
+        0,
+        Math.min(dur, targetTimeRef.current + offset),
+      );
+      if (!seekingRef.current) seek();
+    };
+
+    const onReady = () => {
+      ready = true;
+      video.pause();
+      if (!Number.isFinite(targetTimeRef.current)) {
+        targetTimeRef.current = 0;
+      }
+    };
+
+    video.addEventListener("loadedmetadata", onReady);
+    video.addEventListener("loadeddata", onReady);
+    video.addEventListener("canplay", onReady);
+    video.addEventListener("seeked", onSeeked);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+
+    if (video.readyState === 0) {
+      video.load();
+    } else {
+      onReady();
+    }
+
+    return () => {
+      if (stuckTimer) clearTimeout(stuckTimer);
+      video.removeEventListener("loadedmetadata", onReady);
+      video.removeEventListener("loadeddata", onReady);
+      video.removeEventListener("canplay", onReady);
+      video.removeEventListener("seeked", onSeeked);
+      window.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
+
   const copyEmail = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
@@ -116,13 +218,22 @@ export function GridRankHero() {
   }, []);
 
   return (
-    <div className="gridrank-root relative min-h-screen overflow-hidden text-white">
-      {/* Deep-orange brand gradient background */}
-      <div
+    <div className="gridrank-root relative min-h-screen overflow-hidden bg-black text-white">
+      {/* Background video (mouse-scrub controlled, no autoplay) */}
+      <video
+        ref={videoRef}
+        muted
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        tabIndex={-1}
         aria-hidden="true"
-        className="gr-bg fixed inset-0"
-        style={{ zIndex: 0 }}
-      />
+        className="pointer-events-none fixed inset-0 h-full w-full object-cover"
+        style={{ zIndex: 0, objectPosition: "70% center" }}
+      >
+        <source src={VIDEO_SRC} type="video/mp4" />
+      </video>
 
       {/* Navbar */}
       <nav
