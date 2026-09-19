@@ -1,9 +1,9 @@
-/* Scoped styles for the standalone GridRank Agency hero route.
-   Fonts are loaded via <link> in the route layout (HelveticaNow display + body). */
+/* Scoped styles for the standalone GridRank Agency route. */
 
 .gridrank-root {
   --font-heading: "HelveticaNowDisplay-Medium", "Helvetica Neue", Arial, sans-serif;
   --font-body: "HelveticaNowDisplayW01-Rg", "Helvetica Neue", Arial, sans-serif;
+  --gr-accent: #ef845d;
   font-family: var(--font-body);
   background: #000;
   color: #fff;
@@ -32,12 +32,182 @@
   color: #fff;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .gr-cursor {
   animation: gr-blink 1s step-end infinite;
+}
+
+.gr-enter {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  pointer-events: none;
+}
+
+.gr-enter.is-in {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.gr-page {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gr-band {
+  width: min(42rem, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: 4.5rem 0 0;
+}
+
+.gr-band:first-child {
+  padding-top: 5rem;
+}
+
+.gr-kicker {
+  margin: 0 0 0.75rem;
+  color: var(--gr-accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gr-h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 4.4vw, 2.15rem);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.gr-lead {
+  margin: 0 0 1rem;
+  max-width: 38rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.gr-steps,
+.gr-list,
+.gr-faq {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gr-steps li,
+.gr-list li,
+.gr-faq > div {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gr-steps span,
+.gr-num {
+  color: var(--gr-accent);
+  margin-right: 0.6rem;
+}
+
+.gr-list h3,
+.gr-faq dt {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.gr-list p,
+.gr-faq dd {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+}
+
+.gr-list-2 {
+  display: grid;
+  gap: 0;
+}
+
+@media (min-width: 720px) {
+  .gr-list-2 {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+}
+
+.gr-text-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.gr-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.gr-cta-row a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.gr-footer {
+  width: min(42rem, calc(100% - 2.5rem));
+  margin: 4rem auto 0;
+  padding: 2rem 0 max(2.5rem, env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.gr-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  margin: 1.1rem 0;
+}
+
+.gr-footer a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.gr-fine {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .gr-cursor {
     animation: none;
+  }
+
+  .gr-enter,
+  .gr-enter.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    pointer-events: auto;
   }
 }

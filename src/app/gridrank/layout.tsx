@@ -1,24 +1,53 @@
 import type { Metadata } from "next";
+import {
+  GRIDRANK_DESCRIPTION,
+  GRIDRANK_KEYWORDS,
+  GRIDRANK_TITLE,
+} from "@/lib/gridrank";
+import { getSiteUrl } from "@/lib/seo";
 import "./gridrank.css";
 
+const site = getSiteUrl();
+const pageUrl = `${site}/gridrank`;
+
 export const metadata: Metadata = {
-  title: "GridRank Agency — Websites that book appointments while you work",
-  description:
-    "GridRank builds animated, high-converting websites for clinics, consultants, and service businesses in Dubai, the UK, Canada, and the US, wired to WhatsApp, social lead forms, booking calendars, and notifications so enquiries turn into appointments.",
+  title: { absolute: GRIDRANK_TITLE },
+  description: GRIDRANK_DESCRIPTION,
+  keywords: [...GRIDRANK_KEYWORDS],
+  authors: [{ name: "GridRank Agency", url: pageUrl }],
+  creator: "GridRank Agency",
+  publisher: "GridRank Agency",
+  category: "Digital agency",
   alternates: { canonical: "/gridrank" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "GridRank Agency — Websites that book appointments while you work",
-    description:
-      "Animated, high-converting websites connected to WhatsApp, booking calendars, and social lead funnels for clinics, consultants, and service businesses.",
+    title: GRIDRANK_TITLE,
+    description: GRIDRANK_DESCRIPTION,
     url: "/gridrank",
+    siteName: "GridRank Agency",
+    locale: "en_GB",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: GRIDRANK_TITLE,
+    description: GRIDRANK_DESCRIPTION,
   },
 };
 
 export default function GridRankLayout({ children }: LayoutProps<"/gridrank">) {
   return (
     <>
-      {/* HelveticaNow display + body faces (self-hosted CDN). React hoists these into <head>. */}
       <link
         rel="stylesheet"
         precedence="default"
