@@ -226,30 +226,9 @@ export function GridRankHero() {
   }, []);
 
   return (
-    <header className="relative min-h-dvh overflow-hidden bg-black text-white">
-      <h1 className="sr-only">
-        GridRank Agency builds websites that book appointments while you work
-        for clinics, consultants, and service businesses in Dubai, the UK,
-        Canada, and the US
-      </h1>
-
-      <video
-        ref={videoRef}
-        muted
-        playsInline
-        preload="auto"
-        disablePictureInPicture
-        disableRemotePlayback
-        tabIndex={-1}
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 h-full w-full object-cover"
-        style={{ zIndex: 0, objectPosition: "72% center" }}
-      >
-        <source src={VIDEO_SRC} type="video/mp4" />
-      </video>
-
+    <>
       <nav
-        className="fixed inset-x-0 top-0 flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5"
+        className="gr-nav fixed inset-x-0 top-0 flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5"
         style={{
           zIndex: 10,
           paddingTop: "max(1rem, env(safe-area-inset-top))",
@@ -375,6 +354,28 @@ export function GridRankHero() {
         </a>
       </div>
 
+      <header className="relative min-h-dvh overflow-hidden bg-black text-white">
+        <h1 className="sr-only">
+          GridRank Agency builds websites that book appointments while you work
+          for clinics, consultants, and service businesses in Dubai, the UK,
+          Canada, and the US
+        </h1>
+
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
+          tabIndex={-1}
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 h-full w-full object-cover"
+          style={{ zIndex: 0, objectPosition: "72% center" }}
+        >
+          <source src={VIDEO_SRC} type="video/mp4" />
+        </video>
+
       <section
         className="relative flex min-h-dvh flex-col justify-end overflow-hidden px-5 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-8 md:justify-center md:px-10 md:pb-16"
         style={{ zIndex: 1 }}
@@ -447,6 +448,7 @@ export function GridRankHero() {
           </div>
         </div>
       </section>
-    </header>
+      </header>
+    </>
   );
 }
