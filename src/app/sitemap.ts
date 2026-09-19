@@ -3,7 +3,7 @@ import { getSiteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const site = getSiteUrl();
-  const routes = ["", "/doctors", "/interior", "/hvac", "/jewellery"];
+  const routes = ["", "/doctors", "/interior", "/hvac", "/jewellery", "/gridrank"];
 
   return routes.map((route) => ({
     url: `${site}${route}`,

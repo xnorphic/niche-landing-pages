@@ -1,0 +1,43 @@
+/* Scoped styles for the standalone GridRank Agency hero route.
+   Fonts are loaded via <link> in the route layout (HelveticaNow display + body). */
+
+.gridrank-root {
+  --font-heading: "HelveticaNowDisplay-Medium", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "HelveticaNowDisplayW01-Rg", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body);
+  background: #000;
+  color: #fff;
+}
+
+.gridrank-root * {
+  font-family: inherit;
+}
+
+@keyframes gr-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* globals.css declares an unlayered `a { color: inherit }`, which outranks
+   Tailwind's layered color utilities. Restore black-on-white for the pills. */
+.gridrank-root a.gr-white-pill {
+  color: #000;
+}
+.gridrank-root a.gr-white-pill:hover {
+  color: #fff;
+}
+
+.gr-cursor {
+  animation: gr-blink 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gr-cursor {
+    animation: none;
+  }
+}
